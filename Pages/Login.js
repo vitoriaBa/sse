@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, StyleSheet,View,Image,TouchableOpacity,ImageBackground,TouchableWithoutFeedback, TextInput } from 'react-native';
+import { Text, SafeAreaView, StyleSheet,View,Image,TouchableHighlight,ImageBackground,TouchableWithoutFeedback, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 
@@ -6,7 +6,7 @@ import { useFonts} from 'expo-font';
 
 
 //esse seria o pai
-export default function Login() {
+export default function LoginScreen() {
   
     const[email, setEmail]= useState('');
     const[senha, setSenha] = useState('');
@@ -25,8 +25,7 @@ export default function Login() {
   }
 
 //buton
-    const [pressedButton, setPressedButton] = useState(null);
-
+const [isPressed, setIsPressed] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
 <ImageBackground source={require('../assets/fundo1.png')} style={styles.image}>
@@ -63,19 +62,20 @@ export default function Login() {
     />
 
  <View>
- <View style={styles.buttonContainer}>
-          <View style={[styles.buttonBackground, pressedButton !== 'button5' && styles.buttonPressedBackground]}></View>
-          <TouchableWithoutFeedback
-           onPress={() => navi.navigate('Tela2')}
-            onPressIn={() => setPressedButton('button5')}
-            onPressOut={() => setPressedButton(null)}
-          >
-            <View style={[styles.button, pressedButton !== 'button5' && styles.buttonPressed]}>
-              <Text style={styles.txt}>Continuar                        </Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-
+ <View style={styles.containerbutton}>
+ <TouchableHighlight style={styles.button && styles.buttonHover}
+       onPress={() => {
+        setIsPressed(true);
+        setTimeout(() => setIsPressed(false), 100); // Reinicia o estado após 100ms
+        navi.navigate('Home');
+      }}
+      underlayColor={styles.buttonHover.backgroundColor} // Cor de fundo quando pressionado
+    >
+      <View style={styles.buttonTop}>
+        <Text>Entrar</Text>
+      </View>
+    </TouchableHighlight>
+</View>
     </View>
          <Text>Esqueceu sua senha</Text>
 </View>
@@ -132,6 +132,8 @@ fontFamily:'BrunoAce-Regular',
   },
   containertexto:{
       flex: 1,
+      //marginTop:80,
+      //position:'absolute',
     justifyContent: 'center',
        alignItems:'center',
     width:400,
@@ -144,35 +146,33 @@ margin:5,
   justifyContent: 'center',
   },
 
-  buttonBackground: {
-    position: 'absolute',
-    top: 20,
-    backgroundColor: '#174738',
-    borderRadius: 15,
-    left:30,
-      width:270,
+  buttonTop: {
+    fontSize: 17,
+    fontFamily:'BrunoAce-Regular',
+    width:150,
     height:50,
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    borderRadius: 12, 
+    borderWidth: 2,
+    borderColor: '#174738', 
+    backgroundColor: '#236E57', 
+    color: '#000000',
+    transform: [{ translateY: -5 }], 
   },
-  button: {
-    textAlign:'center',
-     width:270,
-     height:50,
-    backgroundColor: '#236E57',
-    borderRadius: 15,
-    borderWidth: 5,
-    borderColor: '#174738',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation:0,
-    marginLeft:30,
-    marginTop:20,
-    marginBottom:20,
-    marginRight:30
+  buttonHover: {
+    borderRadius: 12, 
+    transform: [{ translateY: -9 }],
   },
-  buttonPressed: {
-    borderBottomWidth: 5,
-    transform: [{translateY: -5}],
-  },
+ containerbutton:{
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  marginTop:20,
+  width:350,
+    height:70,
+   // backgroundColor: '#e8e8e8', 
+ },
   opicoes:{
     textAlign:'center',
     borderRadius:10,

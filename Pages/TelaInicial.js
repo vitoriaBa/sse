@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, StyleSheet,View,Image,TouchableOpacity,ImageBackground,TouchableWithoutFeedback } from 'react-native';
+import { Text, SafeAreaView, StyleSheet,View,Image,Button, ImageBackground,TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 
@@ -18,12 +18,12 @@ export default function TelaInicial() {
   }
 
 //buton
-    const [pressedButton, setPressedButton] = useState(null);
+   
+  const [isPressed, setIsPressed] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
 <ImageBackground source={require('../assets/fundo2.png')} style={styles.image}>
-
 <View style={styles.cima}>
  
     <Image style={styles.img} source={require('../assets/frame1.png')}></Image>
@@ -42,18 +42,31 @@ export default function TelaInicial() {
       </Text>
 
  <View>
- <View style={styles.buttonContainer}>
-          <View style={[styles.buttonBackground, pressedButton !== 'button5' && styles.buttonPressedBackground]}></View>
-          <TouchableWithoutFeedback
-           onPress={() => navi.navigate('Tela2')}
-            onPressIn={() => setPressedButton('button5')}
-            onPressOut={() => setPressedButton(null)}
-          >
-            <View style={[styles.button, pressedButton !== 'button5' && styles.buttonPressed]}>
-              <Text style={styles.txt}>Continuar                        </Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
+
+
+ <View style={styles.bolinhasContainer}>
+
+<View style={styles.Bolinha}></View>
+<View style={styles.Bolinha}></View>
+<View style={styles.Bolinha}></View>
+
+
+</View>
+
+<View style={styles.containerbutton}>
+ <TouchableHighlight style={styles.button && styles.buttonHover}
+       onPress={() => {
+        setIsPressed(true);
+        setTimeout(() => setIsPressed(false), 100); 
+        navi.navigate('Tela2Screen');
+      }}
+      underlayColor={styles.buttonHover.backgroundColor} >
+      <View style={styles.buttonTop}>
+        <Text>Próximo</Text>
+      </View>
+    </TouchableHighlight>
+</View>
+ 
 
     </View>
 
@@ -64,6 +77,7 @@ export default function TelaInicial() {
     
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -104,43 +118,60 @@ fontFamily:'BrunoAce-Regular',
     justifyContent: 'center',
        alignItems:'center',
     width:400,
-margin:5,
+    marginTop:150,
      marginBottom:0
   },
   cima:{
        flex: 1,
     alignItems:'center',
+    marginTop:20,
   justifyContent: 'center',
   },
 
-  buttonBackground: {
-    position: 'absolute',
-    top: 20,
-    backgroundColor: '#174738',
-    borderRadius: 15,
-    left:30,
-      width:270,
+  buttonTop: {
+    fontSize: 17,
+    fontFamily:'BrunoAce-Regular',
+    width:150,
     height:50,
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    borderRadius: 12, 
+    borderWidth: 2,
+    borderColor: '#174738', 
+    backgroundColor: '#236E57', 
+    color: '#000000',
+    transform: [{ translateY: -5 }], 
   },
-  button: {
-     width:270,
-     height:50,
-    backgroundColor: '#236E57',
-    borderRadius: 15,
-    borderWidth: 5,
-    borderColor: '#174738',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation:0,
-    marginLeft:30,
-    marginTop:20,
-    marginBottom:20,
-    marginRight:30
+  buttonHover: {
+    borderRadius: 12, 
+    transform: [{ translateY: -9 }],
   },
-  buttonPressed: {
-    borderBottomWidth: 5,
-    transform: [{translateY: -5}],
-  },
+ containerbutton:{
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  marginTop:20,
+  width:350,
+    height:70,
+   // backgroundColor: '#e8e8e8', 
+ },
+ bolinhasContainer:{
+  flexDirection:'row',
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  justifyContent:'space-evenly',
+backgroundColor: '#e8e8e8',
+  marginTop:20,
+  width:350,
+    height:40,
+},
+ Bolinha:{
+  width:20,
+  borderRadius:50,
+  height:20,
+  backgroundColor:'#5D3587',
+}
  
   
 });

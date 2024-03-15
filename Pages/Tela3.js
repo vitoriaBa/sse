@@ -1,13 +1,13 @@
-import { Text, SafeAreaView, StyleSheet,View,Image,TouchableOpacity,ImageBackground,TouchableWithoutFeedback } from 'react-native';
-
+import { Text, SafeAreaView, StyleSheet,View,Image,Button, ImageBackground,TouchableHighlight } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 
 import { useFonts} from 'expo-font';
-import { useNavigation } from '@react-navigation/native';
+
 
 //esse seria o pai
-export default function Tela3() {
-    const navi = useNavigation();
+export default function Tela2Screen() {
+  const navi = useNavigation();
  
   let [fontsLoaded, fontError] = useFonts({
     'BrunoAce-Regular': require('../assets/fonts/BrunoAce-Regular.ttf'),
@@ -18,12 +18,12 @@ export default function Tela3() {
   }
 
 //buton
-    const [pressedButton, setPressedButton] = useState(null);
+   
+  const [isPressed, setIsPressed] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
-<ImageBackground source={require('../assets/fundo3.png')} style={styles.image}>
-
+<ImageBackground source={require('../assets/fundo1.png')} style={styles.image}>
 <View style={styles.cima}>
  
     <Image style={styles.img} source={require('../assets/frame3.png')}></Image>
@@ -34,17 +34,17 @@ export default function Tela3() {
 <View style={styles.containertexto}>
 
 <Text style={styles.titulo}>
-Acessibilidade e comunicação
+      PROTEÇÃO E SEGURANÇA
       </Text> 
 
        <Text style={styles.texto}>
-       Tenha Uma maior Acessibilidade ao conversar com diversos usuários.
+      Para uma maior segurança no estabelecimento educacional.
       </Text>
 
  <View>
 
 
-<View style={styles.buttonContainer}>
+ <View style={styles.bolinhasContainer}>
 
 <View style={styles.Bolinha}></View>
 <View style={styles.Bolinha}></View>
@@ -53,44 +53,46 @@ Acessibilidade e comunicação
 
 </View>
 
- <View style={styles.buttonContainer}>
-          
-          <TouchableWithoutFeedback
-           onPress={() => navi.navigate('Tela2')}
-            onPressIn={() => setPressedButton('button1')}
-            onPressOut={() => setPressedButton(null)}
-          >
-            <View style={[styles.button, pressedButton !== 'button1' && styles.buttonPressed]}>
-              <Text style={styles.txt}>Voltar</Text>
-            </View>
-          </TouchableWithoutFeedback>
-
-        
-          <TouchableWithoutFeedback
-           onPress={() => navi.navigate('Login')}
-            onPressIn={() => setPressedButton('button5')}
-            onPressOut={() => setPressedButton(null)}
-          >
-            <View style={[styles.button, pressedButton !== 'button5' && styles.buttonPressed]}>
-              <Text style={styles.txt}>Continuar</Text>
-            </View>
-          </TouchableWithoutFeedback>
- </View>
+<View style={styles.containerbutton}>
+ <TouchableHighlight style={styles.button && styles.buttonHover}
+       onPress={() => {
+        setIsPressed(true);
+        setTimeout(() => setIsPressed(false), 100); 
+        navi.navigate('LoginScreen');
+      }}
+      underlayColor={styles.buttonHover.backgroundColor} 
+    >
+      <View style={styles.buttonTop}>
+        <Text>Próximo</Text>
+      </View>
+    </TouchableHighlight>
 
 
-   
-         
-        </View>
+    <TouchableHighlight style={styles.button && styles.buttonHover}
+       onPress={() => {
+        setIsPressed(true);
+        setTimeout(() => setIsPressed(false), 100);
+        navi.navigate('Tela2Screen');
+      }}
+      underlayColor={styles.buttonHover.backgroundColor} 
+    >
+      <View style={styles.buttonTop2}>
+        <Text>Voltar</Text>
+      </View>
+    </TouchableHighlight>
+</View>
+ 
 
     </View>
 
-
+</View>
 
    </ImageBackground>
     </SafeAreaView>
     
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
   },
   txt:{
 marginLeft:45,
-    fontSize: 10,
+    fontSize: 16,
 fontFamily:'BrunoAce-Regular',
 
   },
@@ -131,54 +133,80 @@ fontFamily:'BrunoAce-Regular',
     justifyContent: 'center',
        alignItems:'center',
     width:400,
-margin:5,
+    marginTop:150,
      marginBottom:0
   },
   cima:{
        flex: 1,
     alignItems:'center',
+    marginTop:20,
   justifyContent: 'center',
   },
 
-  buttonBackground: {
-    position: 'absolute',
-    top: 20,
-    backgroundColor: '#174738',
-    borderRadius: 15,
-    left:30,
-      width:270,
-    height:50,
-  },
-  button: {
-     width:150,
-     height:50,
-     textAlign:'center',
+ button: {
+    borderRadius: 12, 
     backgroundColor: '#236E57',
-    borderRadius: 15,
-    borderWidth: 5,
     borderColor: '#174738',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation:0,
-    margin:4,
-  
+    fontSize: 17,
+    fontFamily:'BrunoAce-Regular',
   },
-  buttonPressed: {
-    borderBottomWidth: 5,
-    transform: [{translateY: -5}],
+  buttonTop: {
+    width:150,
+    height:50,
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    borderRadius: 12, 
+    borderWidth: 2,
+    borderColor: '#174738', 
+    backgroundColor: '#236E57', 
+    color: '#000000',
+    transform: [{ translateY: -5 }], 
   },
-  buttonContainer:{
-    width:300,
-    //backgroundColor:'#5D3587',
-    flexDirection:'row',
-    padding:0,
-    margin:0,
+  buttonTop2: {
+    width:150,
+    height:50,
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    borderRadius: 12, 
+    borderWidth: 2,
+    borderColor: '#174738', 
+    backgroundColor: '#FFFFFF', 
+    color: '#000000',
+    transform: [{ translateY: -5 }], 
   },
-  Bolinha:{
-    width:20,
-    borderRadius:50,
-    height:20,
-    backgroundColor:'#5D3587',
-  }
+  buttonHover: {
+    borderRadius: 12, 
+    transform: [{ translateY: -9 }],
+  },
+ containerbutton:{
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  flexDirection:'row',
+  justifyContent:'space-around',
+  marginTop:20,
+  width:350,
+    height:70,
+   backgroundColor: '#e8e8e8', 
+ },
+ bolinhasContainer:{
+  flexDirection:'row',
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  justifyContent:'space-evenly',
+backgroundColor: '#e8e8e8',
+  marginTop:20,
+  width:350,
+    height:40,
+},
+ Bolinha:{
+  width:20,
+  borderRadius:50,
+  height:20,
+  backgroundColor:'#5D3587',
+}
+ 
   
 });
