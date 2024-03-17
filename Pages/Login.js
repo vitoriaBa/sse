@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import { useFonts} from 'expo-font';
 
 
-//esse seria o pai
 export default function LoginScreen() {
   
     const[email, setEmail]= useState('');

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+//import * as React from 'react';
+import { View, TouchableOpacity } from 'react-native';
 
 
 
-export default function MyTabBar({ state, descriptors, navigation, position }) {
+export default function MyTabBar({ state, descriptors, navigation}) {
   return (
     <View style={{ flexDirection: 'row', paddingTop: 20 }}>
       {state.routes.map((route, index) => {

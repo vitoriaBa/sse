@@ -46,7 +46,7 @@ export default function TelaInicial() {
 
  <View style={styles.bolinhasContainer}>
 
-<View style={styles.Bolinha}></View>
+<View style={styles.Banimation1}></View>
 <View style={styles.Bolinha}></View>
 <View style={styles.Bolinha}></View>
 
@@ -171,6 +171,12 @@ backgroundColor: '#e8e8e8',
   borderRadius:50,
   height:20,
   backgroundColor:'#5D3587',
+},
+Banimation1:{
+  width:70,
+  borderRadius:50,
+  height:20,
+  backgroundColor:'#174738',
 }
  
   
