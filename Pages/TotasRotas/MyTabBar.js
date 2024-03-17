@@ -1,4 +1,4 @@
-//import * as React from 'react';
+import * as React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
 
@@ -40,6 +40,7 @@ export default function MyTabBar({ state, descriptors, navigation}) {
 
         return (
           <TouchableOpacity
+          key={route.key} 
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}

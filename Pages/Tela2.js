@@ -1,6 +1,6 @@
 import { Text, SafeAreaView, StyleSheet,View,Image,Button, ImageBackground,TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
 
 import { useFonts} from 'expo-font';
 
@@ -19,7 +19,7 @@ export default function Tela2Screen() {
 
 //buton
    
-  const [isPressed, setIsPressed] = useState(false);
+  //const [isPressed, setIsPressed] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -56,8 +56,8 @@ export default function Tela2Screen() {
 <View style={styles.containerbutton}>
  <TouchableHighlight style={styles.button && styles.buttonHover}
        onPress={() => {
-        setIsPressed(true);
-        setTimeout(() => setIsPressed(false), 100); 
+        //setIsPressed(true);
+       // setTimeout(() => setIsPressed(false), 100); 
         navi.navigate('Tela3Screen');
       }}
       underlayColor={styles.buttonHover.backgroundColor} 
@@ -70,8 +70,8 @@ export default function Tela2Screen() {
 
     <TouchableHighlight style={styles.button && styles.buttonHover}
        onPress={() => {
-        setIsPressed(true);
-        setTimeout(() => setIsPressed(false), 100);
+       // setIsPressed(true);
+        //setTimeout(() => setIsPressed(false), 100);
         navi.navigate('TelaInicial');
       }}
       underlayColor={styles.buttonHover.backgroundColor} 

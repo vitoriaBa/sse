@@ -1,6 +1,6 @@
-import { Text, SafeAreaView, StyleSheet,View,Image,Button, ImageBackground,TouchableHighlight } from 'react-native';
+import { Text, SafeAreaView, StyleSheet,View,Image, ImageBackground,TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
 
 import { useFonts} from 'expo-font';
 
@@ -19,7 +19,7 @@ export default function TelaInicial() {
 
 //buton
    
-  const [isPressed, setIsPressed] = useState(false);
+  //const [isPressed, setIsPressed] = (false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -56,8 +56,8 @@ export default function TelaInicial() {
 <View style={styles.containerbutton}>
  <TouchableHighlight style={styles.button && styles.buttonHover}
        onPress={() => {
-        setIsPressed(true);
-        setTimeout(() => setIsPressed(false), 100); 
+       // setIsPressed(true);
+       // setTimeout(() => setIsPressed(false), 100); 
         navi.navigate('Tela2Screen');
       }}
       underlayColor={styles.buttonHover.backgroundColor} >
@@ -131,7 +131,7 @@ fontFamily:'BrunoAce-Regular',
   buttonTop: {
     fontSize: 17,
     fontFamily:'BrunoAce-Regular',
-    width:150,
+    width:250,
     height:50,
     justifyContent: 'center', 
     alignItems: 'center', 

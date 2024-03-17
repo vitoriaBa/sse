@@ -1,6 +1,6 @@
-import { Text, SafeAreaView, StyleSheet,View,Image,TouchableHighlight,ImageBackground,TouchableWithoutFeedback, TextInput } from 'react-native';
+import { Text, SafeAreaView, StyleSheet,View,Image,TouchableHighlight,ImageBackground, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useStater,useState } from 'react';
 
 import { useFonts} from 'expo-font';
 
@@ -24,7 +24,7 @@ export default function LoginScreen() {
   }
 
 //buton
-const [isPressed, setIsPressed] = useState(false);
+//const [isPressed, setIsPressed] = useReducer(false);
   return (
     <SafeAreaView style={styles.container}>
 <ImageBackground source={require('../assets/fundo1.png')} style={styles.image}>
@@ -64,8 +64,8 @@ const [isPressed, setIsPressed] = useState(false);
  <View style={styles.containerbutton}>
  <TouchableHighlight style={styles.button && styles.buttonHover}
        onPress={() => {
-        setIsPressed(true);
-        setTimeout(() => setIsPressed(false), 100); // Reinicia o estado após 100ms
+        //setIsPressed(true);
+       // setTimeout(() => setIsPressed(false), 100); // Reinicia o estado após 100ms
         navi.navigate('Home');
       }}
       underlayColor={styles.buttonHover.backgroundColor} // Cor de fundo quando pressionado
@@ -148,7 +148,7 @@ margin:5,
   buttonTop: {
     fontSize: 17,
     fontFamily:'BrunoAce-Regular',
-    width:150,
+    width:250,
     height:50,
     justifyContent: 'center', 
     alignItems: 'center', 
