@@ -5,7 +5,7 @@ import React, { useStater,useState } from 'react';
 import { useFonts} from 'expo-font';
 
 
-export default function LoginScreen() {
+export default function Login() {
   
     const[email, setEmail]= useState('');
     const[senha, setSenha] = useState('');

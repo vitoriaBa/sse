@@ -1,15 +1,38 @@
 import { Text, SafeAreaView, StyleSheet,View,Image, ImageBackground,TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-//import React, { useState } from 'react';
-
+import React, { useReducer} from 'react';  //navi.navigate('Tela2Screen');
+import AppIntroSlider from 'react-native-app-intro-slider';
 import { useFonts} from 'expo-font';
+import LoginScreen from './Login';
+
+const slides =[
+  {
+    id:1,
+    image: require('../assets/frame1.png'),
+    titulo:'PROTEÇÃO E SEGURANÇA',
+    texto:'Para uma maior segurança no estabelecimento educacional.',
+    ImageBackground:require('../assets/fundo2.png'),
+  },
+  {
+    id:2,
+    image: require('../assets/frame2.png'),
+    titulo:' SEGURANÇA',
+    texto:'Para uma maior segurança no estabelecimento educacional.',
+    ImageBackground:require('../assets/fundo1.png'),
+  },
+  {
+    id:3,
+    image: require('../assets/frame3.png'),
+    titulo:'PROTEÇÃO',
+    texto:'Para uma maior segurança no estabelecimento educacional.',
+    ImageBackground:require('../assets/fundo1.png'),
+  },
+]
 
 
-//esse seria o pai
 export default function TelaInicial() {
-  const navi = useNavigation();
- 
-  let [fontsLoaded, fontError] = useFonts({
+   //fonte
+   let [fontsLoaded, fontError] = useFonts({
     'BrunoAce-Regular': require('../assets/fonts/BrunoAce-Regular.ttf'),
   });
 
@@ -17,65 +40,90 @@ export default function TelaInicial() {
     return null;
   }
 
-//buton
-   
-  //const [isPressed, setIsPressed] = (false);
+
+  const navi = useNavigation();
+
+  const [showLogin, setShowLogin] = useReducer(false);
+ 
+
+function Slides({item}){
+  return(
+    <ImageBackground source={item.ImageBackground} style={styles.image}>
+    
+    <Image source={item.image} style={styles.img} /> 
+            <View style={styles.containertexto}>
+            <Text style={styles.titulo}>{item.titulo}</Text>
+            <Text style={styles.texto}>{item.texto}</Text>
+            </View>
+          
+    </ImageBackground>
+  )
+}
+
+
+ if(showLogin){
+  return navi.navigate(LoginScreen);
+ }
+else{
+ 
+
 
   return (
-    <SafeAreaView style={styles.container}>
-<ImageBackground source={require('../assets/fundo2.png')} style={styles.image}>
-<View style={styles.cima}>
- 
-    <Image style={styles.img} source={require('../assets/frame1.png')}></Image>
+    <AppIntroSlider
+    renderItem={Slides}
+    data={slides}
+    activeDotStyle={{
+      backgroundColor:'#236E57',
+      width:60,
+      height:20,
+      borderRadius:30,
+      marginBottom:150,
       
-</View>
+    }}
+    renderDoneButton={()=> <Text style={{
+      fontSize: 17,
+      fontFamily:'BrunoAce-Regular',
+      width:380,
+      height:40,
+      padding:10,
+      textAlign:'center',
+      borderRadius: 12, 
+      borderWidth: 2,
+      borderColor: '#174738', 
+      backgroundColor: '#236E57', 
+      color: '#000000',
+      transform: [{ translateY: -5 }], 
+}}>Logar</Text>}
+    renderNextButton={() => <Text style={{
+      fontSize: 17,
+    fontFamily:'BrunoAce-Regular',
+    width:380,
+    height:40,
+    padding:10,
+    textAlign:'center',
+    borderRadius: 12, 
+    borderWidth: 2,
+    borderColor: '#174738', 
+    backgroundColor: '#236E57', 
+    color: '#000000',
+    transform: [{ translateY: -5 }], 
 
-
-<View style={styles.containertexto}>
-
-<Text style={styles.titulo}>
-      PROTEÇÃO E SEGURANÇA
-      </Text> 
-
-       <Text style={styles.texto}>
-      Para uma maior segurança no estabelecimento educacional.
-      </Text>
-
- <View>
-
-
- <View style={styles.bolinhasContainer}>
-
-<View style={styles.Banimation1}></View>
-<View style={styles.Bolinha}></View>
-<View style={styles.Bolinha}></View>
-
-
-</View>
-
-<View style={styles.containerbutton}>
- <TouchableHighlight style={styles.button && styles.buttonHover}
-       onPress={() => {
-       // setIsPressed(true);
-       // setTimeout(() => setIsPressed(false), 100); 
-        navi.navigate('Tela2Screen');
-      }}
-      underlayColor={styles.buttonHover.backgroundColor} >
-      <View style={styles.buttonTop}>
-        <Text>Próximo</Text>
-      </View>
-    </TouchableHighlight>
-</View>
- 
-
-    </View>
-
-</View>
-
-   </ImageBackground>
-    </SafeAreaView>
+    }}>Próximo</Text>}
     
+    onDone={() => {return navi.navigate(LoginScreen)}}
+
+    dotStyle={{
+      backgroundColor: '#5D3587',
+      width: 20,
+      height: 20,
+      borderRadius: 10,
+      marginHorizontal: 18, 
+      marginBottom:150,
+    }}
+    />
+  
   );
+}
 }
 
 
@@ -92,12 +140,11 @@ const styles = StyleSheet.create({
 
   },
   img:{
-    marginTop:50,
+    marginTop:10,
     width:400,
     height:400,
   },
   titulo: {
-    margin: 24,
     fontSize: 32,
     textAlign: 'center',
     fontFamily:'BrunoAce-Regular',
@@ -118,7 +165,6 @@ fontFamily:'BrunoAce-Regular',
     justifyContent: 'center',
        alignItems:'center',
     width:400,
-    marginTop:150,
      marginBottom:0
   },
   cima:{

@@ -1,12 +1,12 @@
 import {NavigationContainer} from '@react-navigation/native';
-import RotasScreen from './Pages/TotasRotas/RotasScreen';
+import Rotas from './Pages/TotasRotas/Rotas';
 
 
 
 export default function App() {
   return (
 <NavigationContainer>
-<RotasScreen />
+<Rotas/>
 </NavigationContainer>
   );
 }
